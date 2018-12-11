@@ -73,8 +73,13 @@ public class RegisterFragment extends Fragment {
                            .show();
                }
                //ดูว่าเอจเป็นตัวเลขไหม และพาสเวิดต้องมีความยาวมากกว่า 6
-               else if (Character.isDigit(ageInt) || password.length() <6 ){
+               else if (Integer.parseInt(age) > 10 && Integer.parseInt(age) < 80 ){
                    Toast.makeText(getActivity(), "กรุณากรอกข้อมูลให้ถูกต้อง"
+                           , Toast.LENGTH_SHORT)
+                           .show();
+               }
+               else if (password.length() <6 ){
+                   Toast.makeText(getActivity(), "กรุณากรอกรหัสผ่านให้มากกว่า 6 ตัว"
                            , Toast.LENGTH_SHORT)
                            .show();
                }
@@ -101,12 +106,12 @@ public class RegisterFragment extends Fragment {
                    sp.commit();
 
 
-                   Toast.makeText(getActivity(), "Save Success"
+                   Toast.makeText(getActivity(), "Register Success"
                            , Toast.LENGTH_SHORT)
                            .show();
 
 
-
+                    //สมัครสมาชิกเสร็จย้ายไปหน้า login
                    getActivity().getSupportFragmentManager()
                            .beginTransaction()
                            .replace(R.id.main_view, new LoginFragment())
