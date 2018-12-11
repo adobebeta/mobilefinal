@@ -11,6 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import th.ac.kmitl.a59070090.Friend.MyfriendFragment;
 
@@ -45,6 +52,26 @@ public class HomeFragement extends Fragment{
         String name = spShow.getString("name","0");
 
         hello.setText("Hello "+name); //ตั้งค่าว่า Hello ตามด้วยชื่อ
+
+        //--------------------------------
+        String quoteStr = "";
+        try {
+            InputStream inputStream = getActivity().openFileInput("config.txt");
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append(receiveString).append("\n");
+                }
+                inputStream.close();
+                quoteStr = stringBuilder.toString();
+                quote.setText(quoteStr);
+        }
+
+        //-------------------------------------
+
 
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,5 +108,10 @@ public class HomeFragement extends Fragment{
 
 
 
+    } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
