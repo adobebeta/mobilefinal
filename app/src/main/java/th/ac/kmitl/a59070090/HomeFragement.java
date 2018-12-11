@@ -98,6 +98,14 @@ public class HomeFragement extends Fragment{
         signoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //ถ้าผู้ใช้กด signOut ให้ไปเคลียค่าใน sharePreference
+                //โหมดแก้ไข
+                SharedPreferences.Editor sp = getContext().getSharedPreferences("name", MODE_PRIVATE).edit();
+                sp.putString("name", "").apply();
+                sp.commit();
+
+
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.main_view, new LoginFragment())
