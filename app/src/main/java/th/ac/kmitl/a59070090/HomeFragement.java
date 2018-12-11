@@ -30,6 +30,9 @@ public class HomeFragement extends Fragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
+
+
         TextView hello = getView().findViewById(R.id.hello);
         TextView quote = getView().findViewById(R.id.quote);
         Button profileBtn = getView().findViewById(R.id.profileSetBtn);

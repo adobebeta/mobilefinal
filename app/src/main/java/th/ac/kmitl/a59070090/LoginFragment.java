@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class LoginFragment extends Fragment {
     Button logintBtn;
@@ -38,6 +41,17 @@ public class LoginFragment extends Fragment {
     logintBtn = getView().findViewById(R.id.login_login_btn);
     registerBtn = getView().findViewById(R.id.login_register_btn);
 
+        SharedPreferences spShow1 = getContext().getSharedPreferences("name", MODE_PRIVATE);
+        Log.d("Home",spShow1.getString("name","0"));
+        String namePreference = spShow1.getString("name","0");
+        //Check ว่ามีการ login ไว้แล้วหรือยัง โดยการดูว่ามี userID อยู่ใน shareมั้ย ถ้ามีอยู่แล้วให้ไปหน้า
+        if (!(namePreference.equals("0"))){
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_view, new HomeFragement())
+                    .addToBackStack(null)
+                    .commit();
+        }
 
 
 
